@@ -55,13 +55,6 @@ class Event_Listeners(commands.Cog):
         if channel is not None:
             await channel.send(f"Welcome to the server {member.mention}!")
 
-        with open("cogs/users.json", "r") as f:
-            users = json.load(f)
-
-        await self.update_data(users, member)
-
-        with open("cogs/users.json", "w") as f:
-            json.dump(users, f)
 
 
 def setup(bot):

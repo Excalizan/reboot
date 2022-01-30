@@ -8,13 +8,16 @@ class Moderation(commands.Cog):
 
     @commands.command()
     @commands.has_permissions(kick_members=True)
-    async def kick(self, ctx, member, *, reason=None):
-        await member.kick(reason=reason)
-        await ctx.send(f"User {member.mention} has been kicked. Reason: {reason}")
+    async def kick(self, ctx, member: discord.Member, *, reason=None):
+        try:
+            await member.kick(reason=reason)
+            await ctx.send(f"User {member.mention} has been kicked. Reason: {reason}")
+        except Exception as e:
+            await ctx.send(f"Error: {e}")
 
     @commands.command()
     @commands.has_permissions(ban_members=True)
-    async def ban(self, ctx, member, *, reason=None):
+    async def ban(self, ctx, member: discord.Member, *, reason=None):
         await member.ban(reason=reason)
         await ctx.send(f"User {member.mention} has been banned. Reason: {reason}")
 
