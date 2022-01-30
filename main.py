@@ -46,4 +46,5 @@ for filename in listdir("cogs"):
 
 
 # !run the bot
+keep_alive()
 bot.run(TOKEN)
