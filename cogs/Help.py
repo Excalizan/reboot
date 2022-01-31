@@ -22,7 +22,7 @@ class Help(commands.Cog):
                      value="kick, ban, mute, unmute, clear, timeout",
                      inline=False)
         em.add_field(name="Level",
-                     value="level",
+                     value="level, leaderboard",
                      inline=False)
         await ctx.send(embed=em)
 
@@ -167,6 +167,16 @@ class Help(commands.Cog):
 
         em.add_field(name="**Syntax**", value="!lvl [user] <reason>")
         em.add_field(name="**Aliases**", value="rank, level")
+        await ctx.send(embed=em)
+
+    @help.command()
+    async def leaderboardl(self, ctx):
+        em = discord.Embed(title="Leaderboard",
+                           description="See the leaderboard!",
+                           color=ctx.author.color)
+
+        em.add_field(name="**Syntax**", value="!leaderboard")
+        em.add_field(name="**Aliases**", value="lb")
         await ctx.send(embed=em)
 
 

@@ -5,6 +5,7 @@ from os import listdir
 from dotenv import load_dotenv
 import json
 from keep_alive import keep_alive
+import asyncio
 # load the .env file and get the token
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
@@ -47,4 +48,5 @@ for filename in listdir("cogs"):
 
 # !run the bot
 keep_alive()
+bot.wait_until_ready()
 bot.run(TOKEN)
