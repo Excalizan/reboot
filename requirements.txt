@@ -1,1 +1,4 @@
 py-cord==2.0.0b1
+python-dotenv==0.0.5
+aiosqlite==0.17.0
+asyncio==3.4.3
