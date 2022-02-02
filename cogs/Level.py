@@ -21,31 +21,32 @@ class Level(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if not message.author.bot:
-            cursor = await self.bot.db.execute(
-                "INSERT OR IGNORE INTO guildData (guild_id, user_id, exp) VALUES (?,?,?)",
-                (message.guild.id, message.author.id, 1),
-            )
-
-            if cursor.rowcount == 0:
-                await self.bot.db.execute(
-                    "UPDATE guildData SET exp = exp + 1 WHERE guild_id = ? AND user_id = ?",
-                    (message.guild.id, message.author.id),
+        if not self.bot.guild.id == 110373943822540800:
+            if not message.author.bot:
+                cursor = await self.bot.db.execute(
+                    "INSERT OR IGNORE INTO guildData (guild_id, user_id, exp) VALUES (?,?,?)",
+                    (message.guild.id, message.author.id, 1),
                 )
-                cur = await self.bot.db.execute(
-                    "SELECT exp FROM guildData WHERE guild_id = ? AND user_id = ?",
-                    (message.guild.id, message.author.id),
-                )
-                data = await cur.fetchone()
-                exp = data[0]
-                lvl = math.sqrt(exp) / self.bot.multiplier
 
-                if lvl.is_integer():
-                    await message.channel.send(
-                        f"{message.author.mention} well done! You're now level: {int(lvl)}."
+                if cursor.rowcount == 0:
+                    await self.bot.db.execute(
+                        "UPDATE guildData SET exp = exp + 1 WHERE guild_id = ? AND user_id = ?",
+                        (message.guild.id, message.author.id),
                     )
+                    cur = await self.bot.db.execute(
+                        "SELECT exp FROM guildData WHERE guild_id = ? AND user_id = ?",
+                        (message.guild.id, message.author.id),
+                    )
+                    data = await cur.fetchone()
+                    exp = data[0]
+                    lvl = math.sqrt(exp) / self.bot.multiplier
 
-            await self.bot.db.commit()
+                    if lvl.is_integer():
+                        await message.channel.send(
+                            f"{message.author.mention} well done! You're now level: {int(lvl)}."
+                        )
+
+                await self.bot.db.commit()
 
 
     @commands.command(aliases=["rank", "lvl"])

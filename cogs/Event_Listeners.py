@@ -51,9 +51,10 @@ class Event_Listeners(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
-        channel = member.guild.system_channel
-        if channel is not None:
-            await channel.send(f"Welcome to the server {member.mention}!")
+        if not self.bot.guild.id == 110373943822540800:
+            channel = member.guild.system_channel
+            if channel is not None:
+                await channel.send(f"Welcome to the server {member.mention}!")
 
 
 
